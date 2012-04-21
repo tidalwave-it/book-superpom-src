@@ -68,6 +68,7 @@
                             </execution>
                         </executions>
                     </plugin>
+                    
                     <plugin>
                         <artifactId>maven-resources-plugin</artifactId>
                         <executions>
@@ -98,7 +99,7 @@
                             <inputFiles>
                                 <basedir>target/xml</basedir>
                             </inputFiles>
-                            <userConfigFile>src/main/fop/config/fop.xml</userConfigFile>
+                            <userConfigFile>target/fop/config/fop.xml</userConfigFile>
                             <title>${title}</title>
                             <author>${author}</author>
                             <!-- subject></subject -->
