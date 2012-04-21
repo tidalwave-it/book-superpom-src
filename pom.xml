@@ -1,0 +1,248 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
+    <modelVersion>4.0.0</modelVersion>
+ 
+    <parent>
+        <groupId>it.tidalwave.thesefoolishthings</groupId>
+        <artifactId>superpom</artifactId>
+        <version>1.13</version>
+    </parent>
+ 
+    <groupId>net.stoppingdown.books</groupId>
+    <artifactId>book-superpom</artifactId>
+    <name>Book Superpom</name>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    
+    <properties>
+        <bookFileName>${title} v${project.version}</bookFileName>
+        <maven.build.timestamp.format>dd-MM-yyyy HH:mm</maven.build.timestamp.format>
+        <timestamp>${maven.build.timestamp}</timestamp>
+
+        <scm.repo.url>ssh://hg@bitbucket.org/fabriziogiudici/book-superpom-src</scm.repo.url>
+        <scm.repo.readonly.url>https://bitbucket.org/fabriziogiudici/book-superpom-src</scm.repo.readonly.url>
+        <scm.repo.browse.url>https://bitbucket.org/fabriziogiudici/book-superpom-src/src</scm.repo.browse.url>
+    </properties>
+ 
+    <!-- Repeated because of http://jira.codehaus.org/browse/SCM-442 -->
+    <scm>
+        <connection>scm:hg:${scm.repo.readonly.url}</connection>
+        <developerConnection>scm:hg:${scm.repo.effective.url}</developerConnection>
+        <url>${scm.repo.browse.url}</url>
+    </scm>
+
+    <profiles>
+        <profile>
+            <id>book-profile</id>
+            <activation>
+                <file>
+                    <exists>src/config/activate-book-profile</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-resources</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/target/xml</outputDirectory>
+                                    <resources>          
+                                        <resource>
+                                            <directory>src/main/fop/xml</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>              
+                                </configuration>            
+                            </execution>
+                        </executions>
+                    </plugin>
+            
+                    <plugin>
+                        <groupId>ch.becompany</groupId>
+                        <artifactId>fop-maven-plugin</artifactId>
+                        <version>1.0-SNAPSHOT</version>
+                        <configuration>
+                            <inputFiles>
+                                <basedir>target/xml</basedir>
+                            </inputFiles>
+                            <userConfigFile>src/main/fop/config/fop.xml</userConfigFile>
+                            <title>${title}</title>
+                            <author>${author}</author>
+                    <!-- subject></subject -->
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>build-blurb-book-standardlandscape-dustjacket</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>fop</goal>
+                                </goals>
+                                <configuration>
+                                    <xslFile>src/main/fop/xslt/PhotoBook-fo.xslt</xslFile>
+                                    <outputFileName>${bookFileName} (Blurb Standard landscape, dust jacket).pdf</outputFileName>
+                                    <xsltParameters>
+                                        <photoPath>/Volumes/Media/Photography/Photos/Books/Photos/Print/sRGB</photoPath>
+                                        <format>blurb:standard landscape:hardcover,dust jacket:standard paper</format>
+                                    </xsltParameters>
+                                    <rendererOptions>
+                                        <pdf-x-mode>PDF/X-3:2003</pdf-x-mode>
+                                    </rendererOptions>                            
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>build-blurb-book-standardlandscape-dustjacket-cover</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>fop</goal>
+                                </goals>
+                                <configuration>
+                                    <xslFile>src/main/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
+                                    <outputFileName>${bookFileName} (Blurb Standard landscape, dust jacket) Cover.pdf</outputFileName>
+                                    <xsltParameters>
+                                        <photoPath>/Volumes/Media/Photography/Photos/Books/Photos/Print/sRGB</photoPath>
+                                        <format>blurb:standard landscape:hardcover,dust jacket:standard paper</format>
+                                    </xsltParameters>
+                                    <rendererOptions>
+                                        <pdf-x-mode>PDF/X-3:2003</pdf-x-mode>
+                                    </rendererOptions>                            
+                                </configuration>
+                            </execution>
+                    
+                            <execution>
+                                <id>build-blurb-book-standardlandscape-softcover</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>fop</goal>
+                                </goals>
+                                <configuration>
+                                    <xslFile>src/main/fop/xslt/PhotoBook-fo.xslt</xslFile>
+                                    <outputFileName>${bookFileName} (Blurb Standard landscape, softcover).pdf</outputFileName>
+                                    <xsltParameters>
+                                        <photoPath>/Volumes/Media/Photography/Photos/Books/Photos/Print/sRGB</photoPath>
+                                        <format>blurb:standard landscape:softcover:standard paper</format>
+                                    </xsltParameters>
+                                    <rendererOptions>
+                                        <pdf-x-mode>PDF/X-3:2003</pdf-x-mode>
+                                    </rendererOptions>                            
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>build-blurb-book-standardlandscape-softcover-cover</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>fop</goal>
+                                </goals>
+                                <configuration>
+                                    <xslFile>src/main/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
+                                    <outputFileName>${bookFileName} (Blurb Standard landscape, softcover) Cover.pdf</outputFileName>
+                                    <xsltParameters>
+                                        <photoPath>/Volumes/Media/Photography/Photos/Books/Photos/Print/sRGB</photoPath>
+                                        <format>blurb:standard landscape:softcover:standard paper</format>
+                                    </xsltParameters>
+                                    <rendererOptions>
+                                        <pdf-x-mode>PDF/X-3:2003</pdf-x-mode>
+                                    </rendererOptions>                            
+                                </configuration>
+                            </execution>
+ 
+                            <execution>
+                                <id>build-blurb-book-largelandscape-dustjacket</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>fop</goal>
+                                </goals>
+                                <configuration>
+                                    <xslFile>src/main/fop/xslt/PhotoBook-fo.xslt</xslFile>
+                                    <outputFileName>${bookFileName} (Blurb Large format landscape, dust jacket).pdf</outputFileName>
+                                    <xsltParameters>
+                                        <photoPath>/Volumes/Media/Photography/Photos/Books/Photos/Print/sRGB</photoPath>
+                                        <format>blurb:large format landscape:hardcover,dust jacket:standard paper</format>
+                                    </xsltParameters>
+                                    <rendererOptions>
+                                        <pdf-x-mode>PDF/X-3:2003</pdf-x-mode>
+                                    </rendererOptions>                            
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>build-blurb-book-largelandscape-dustjacket-cover</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>fop</goal>
+                                </goals>
+                                <configuration>
+                                    <xslFile>src/main/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
+                                    <outputFileName>${bookFileName} (Blurb Large format landscape, dust jacket) Cover.pdf</outputFileName>
+                                    <xsltParameters>
+                                        <photoPath>/Volumes/Media/Photography/Photos/Books/Photos/Print/sRGB</photoPath>
+                                        <format>blurb:large format landscape:hardcover,dust jacket:standard paper</format>
+                                    </xsltParameters>
+                                    <rendererOptions>
+                                        <pdf-x-mode>PDF/X-3:2003</pdf-x-mode>
+                                    </rendererOptions>                            
+                                </configuration>
+                            </execution>
+                    
+                            <execution>
+                                <id>build-viovio-book-11x8.5-hardcover</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>fop</goal>
+                                </goals>
+                                <configuration>
+                                    <xslFile>src/main/fop/xslt/PhotoBook-fo.xslt</xslFile>
+                                    <outputFileName>${bookFileName} (Viovio 11x8.5).pdf</outputFileName>
+                                    <xsltParameters>
+                                        <photoPath>/Volumes/Media/Photography/Photos/Books/Photos/Print/AdobeRGB</photoPath>
+                                        <format>viovio:11x8.5:imagewrap hardcover:premium</format>
+                                    </xsltParameters>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>build-viovio-book-11x8.5-hardcover-cover</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>fop</goal>
+                                </goals>
+                                <configuration>
+                                    <xslFile>src/main/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
+                                    <outputFileName>${bookFileName} (Viovio 11x8.5) Cover.pdf</outputFileName>
+                                    <xsltParameters>
+                                        <photoPath>/Volumes/Media/Photography/Photos/Books/Photos/Print/sRGB</photoPath>
+                                        <format>viovio:11x8.5:imagewrap hardcover:premium</format>
+                                    </xsltParameters>
+                                </configuration>
+                            </execution>
+ 
+                            <execution>
+                                <id>build-ebook</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>fop</goal>
+                                </goals>
+                                <configuration>
+                                    <xslFile>src/main/fop/xslt/PhotoBookeBook-fo.xslt</xslFile>
+                                    <outputFileName>${bookFileName} eBook.pdf</outputFileName>
+                                    <xsltParameters>
+                                        <photoPath>/Volumes/Media/Photography/Photos/Books/Photos/eBook</photoPath>
+                                        <format>eBook:12x8</format>
+                                    </xsltParameters>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+  
+</project>
+
