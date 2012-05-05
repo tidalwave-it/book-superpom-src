@@ -180,6 +180,43 @@
                             </execution>
  
                             <execution>
+                                <id>build-blurb-book-standardlandscape-imagewrap</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>fop</goal>
+                                </goals>
+                                <configuration>
+                                    <xslFile>target/fop/xslt/PhotoBook-fo.xslt</xslFile>
+                                    <outputFileName>${bookFileName} (Blurb Standard landscape, imagewrap).pdf</outputFileName>
+                                    <xsltParameters>
+                                        <photoPath>/Volumes/Media/Photography/Photos/Books/Photos/Print/sRGB</photoPath>
+                                        <format>blurb:standard landscape:imagewrap:standard paper</format>
+                                    </xsltParameters>
+                                    <rendererOptions>
+                                        <pdf-x-mode>PDF/X-3:2003</pdf-x-mode>
+                                    </rendererOptions>                            
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>build-blurb-book-standardlandscape-imagewrap-cover</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>fop</goal>
+                                </goals>
+                                <configuration>
+                                    <xslFile>target/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
+                                    <outputFileName>${bookFileName} (Blurb Standard landscape, imagewrap) Cover.pdf</outputFileName>
+                                    <xsltParameters>
+                                        <photoPath>/Volumes/Media/Photography/Photos/Books/Photos/Print/sRGB</photoPath>
+                                        <format>blurb:standard landscape:imagewrap:standard paper</format>
+                                    </xsltParameters>
+                                    <rendererOptions>
+                                        <pdf-x-mode>PDF/X-3:2003</pdf-x-mode>
+                                    </rendererOptions>                            
+                                </configuration>
+                            </execution>
+                            
+                            <execution>
                                 <id>build-blurb-book-largelandscape-dustjacket</id>
                                 <phase>compile</phase>
                                 <goals>
