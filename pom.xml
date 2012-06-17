@@ -15,7 +15,7 @@
     <artifactId>book-superpom</artifactId>
     <name>Book Superpom</name>
     <packaging>pom</packaging>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
     
     <properties>
         <bookFileName>${title} v${project.version}</bookFileName>
