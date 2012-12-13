@@ -21,6 +21,7 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <typesetting.version>1.0-SNAPSHOT</typesetting.version>
         <photoPath>/Volumes/Media/Photography/Photos/Books/Photos</photoPath>
+        <typeSetting.dir>${basedir}/target/filtered-typesetting</typeSetting.dir>
 
         <scm.repo.url>ssh://hg@bitbucket.org/fabriziogiudici/book-superpom-src</scm.repo.url>
         <scm.repo.readonly.url>https://bitbucket.org/fabriziogiudici/book-superpom-src</scm.repo.readonly.url>
@@ -60,7 +61,7 @@
                                             <groupId>net.stoppingdown.books</groupId>
                                             <artifactId>typesetting</artifactId>
                                             <version>${typesetting.version}</version>
-                                            <outputDirectory>target</outputDirectory>
+                                            <outputDirectory>target/typesetting</outputDirectory>
                                         </artifactItem>
                                     </artifactItems>
                                 </configuration>
@@ -87,6 +88,32 @@
                                     </resources>              
                                 </configuration>            
                             </execution>
+                            <execution>
+                                <id>copy-typesetting-resources</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/target/filtered-typesetting</outputDirectory>
+                                    <resources>          
+                                        <resource>
+                                            <directory>${basedir}/target/typesetting</directory>
+                                            <filtering>true</filtering>
+                                            <includes>
+                                                <include>**/*.xml</include>
+                                            </includes>
+                                        </resource>
+                                        <resource>
+                                            <directory>${basedir}/target/typesetting</directory>
+                                            <filtering>false</filtering>
+                                            <excludes>
+                                                <exclude>**/*.xml</exclude>
+                                            </excludes>
+                                        </resource>
+                                    </resources>              
+                                </configuration>            
+                            </execution>
                         </executions>
                     </plugin>
             
@@ -98,7 +125,7 @@
                             <inputFiles>
                                 <basedir>target/xml</basedir>
                             </inputFiles>
-                            <userConfigFile>target/fop/config/fop.xml</userConfigFile>
+                            <userConfigFile>target/filtered-typesetting/fop/config/fop.xml</userConfigFile>
                             <title>${title}</title>
                             <author>${author}</author>
                             <!-- subject></subject -->
@@ -112,7 +139,7 @@
                                     <goal>fop</goal>
                                 </goals>
                                 <configuration>
-                                    <xslFile>target/fop/xslt/PhotoBook-fo.xslt</xslFile>
+                                    <xslFile>${typeSetting.dir}/fop/xslt/PhotoBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Standard landscape, dust jacket).pdf</outputFileName>
                                     <xsltParameters>
                                         <photoPath>${photoPath}/Print/sRGB</photoPath>
@@ -130,7 +157,7 @@
                                     <goal>fop</goal>
                                 </goals>
                                 <configuration>
-                                    <xslFile>target/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
+                                    <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Standard landscape, dust jacket) Cover.pdf</outputFileName>
                                     <xsltParameters>
                                         <photoPath>${photoPath}/Print/sRGB</photoPath>
@@ -150,7 +177,7 @@
                                     <goal>fop</goal>
                                 </goals>
                                 <configuration>
-                                    <xslFile>target/fop/xslt/PhotoBook-fo.xslt</xslFile>
+                                    <xslFile>${typeSetting.dir}/fop/xslt/PhotoBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Standard landscape, softcover).pdf</outputFileName>
                                     <xsltParameters>
                                         <photoPath>${photoPath}/Print/sRGB</photoPath>
@@ -168,7 +195,7 @@
                                     <goal>fop</goal>
                                 </goals>
                                 <configuration>
-                                    <xslFile>target/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
+                                    <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Standard landscape, softcover) Cover.pdf</outputFileName>
                                     <xsltParameters>
                                         <photoPath>${photoPath}/Print/sRGB</photoPath>
@@ -187,7 +214,7 @@
                                     <goal>fop</goal>
                                 </goals>
                                 <configuration>
-                                    <xslFile>target/fop/xslt/PhotoBook-fo.xslt</xslFile>
+                                    <xslFile>${typeSetting.dir}/fop/xslt/PhotoBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Standard landscape, imagewrap).pdf</outputFileName>
                                     <xsltParameters>
                                         <photoPath>${photoPath}/Print/sRGB</photoPath>
@@ -205,7 +232,7 @@
                                     <goal>fop</goal>
                                 </goals>
                                 <configuration>
-                                    <xslFile>target/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
+                                    <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Standard landscape, imagewrap) Cover.pdf</outputFileName>
                                     <xsltParameters>
                                         <photoPath>${photoPath}/Print/sRGB</photoPath>
@@ -223,7 +250,7 @@
                                     <goal>fop</goal>
                                 </goals>
                                 <configuration>
-                                    <xslFile>target/fop/xslt/PhotoBook-fo.xslt</xslFile>
+                                    <xslFile>${typeSetting.dir}/fop/xslt/PhotoBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Large format landscape, imagewrap).pdf</outputFileName>
                                     <xsltParameters>
                                         <photoPath>${photoPath}/Print/sRGB</photoPath>
@@ -241,7 +268,7 @@
                                     <goal>fop</goal>
                                 </goals>
                                 <configuration>
-                                    <xslFile>target/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
+                                    <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Large format landscape, imagewrap) Cover.pdf</outputFileName>
                                     <xsltParameters>
                                         <photoPath>${photoPath}/Print/sRGB</photoPath>
@@ -260,7 +287,7 @@
                                     <goal>fop</goal>
                                 </goals>
                                 <configuration>
-                                    <xslFile>target/fop/xslt/PhotoBook-fo.xslt</xslFile>
+                                    <xslFile>${typeSetting.dir}/fop/xslt/PhotoBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Large format landscape, dust jacket).pdf</outputFileName>
                                     <xsltParameters>
                                         <photoPath>${photoPath}/Print/sRGB</photoPath>
@@ -278,7 +305,7 @@
                                     <goal>fop</goal>
                                 </goals>
                                 <configuration>
-                                    <xslFile>target/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
+                                    <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Large format landscape, dust jacket) Cover.pdf</outputFileName>
                                     <xsltParameters>
                                         <photoPath>${photoPath}/Print/sRGB</photoPath>
@@ -298,7 +325,7 @@
                                     <goal>fop</goal>
                                 </goals>
                                 <configuration>
-                                    <xslFile>target/fop/xslt/PhotoBook-fo.xslt</xslFile>
+                                    <xslFile>${typeSetting.dir}/fop/xslt/PhotoBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Viovio 11x8.5).pdf</outputFileName>
                                     <xsltParameters>
                                         <photoPath>${photoPath}/Print/AdobeRGB</photoPath>
@@ -313,7 +340,7 @@
                                     <goal>fop</goal>
                                 </goals>
                                 <configuration>
-                                    <xslFile>target/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
+                                    <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Viovio 11x8.5) Cover.pdf</outputFileName>
                                     <xsltParameters>
                                         <photoPath>${photoPath}/Print/sRGB</photoPath>
@@ -329,7 +356,7 @@
                                     <goal>fop</goal>
                                 </goals>
                                 <configuration>
-                                    <xslFile>target/fop/xslt/PhotoBookeBook-fo.xslt</xslFile>
+                                    <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookeBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} eBook.pdf</outputFileName>
                                     <xsltParameters>
                                         <photoPath>${photoPath}/eBook</photoPath>
