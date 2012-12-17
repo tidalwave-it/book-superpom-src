@@ -19,7 +19,7 @@
         <bookFileName>${title} v${project.version}</bookFileName>
         <maven.build.timestamp.format>dd-MM-yyyy HH:mm</maven.build.timestamp.format>
         <book.timestamp>${maven.build.timestamp}</book.timestamp>
-        <typesetting.version>1.0-SNAPSHOT</typesetting.version>
+        <typesetting.version>1.2</typesetting.version>
         <photoPath>/Volumes/Media/Photography/Photos/Books/Photos</photoPath>
         <typeSetting.dir>${basedir}/target/filtered-typesetting</typeSetting.dir>
 
