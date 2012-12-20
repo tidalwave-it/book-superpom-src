@@ -13,7 +13,7 @@
     <artifactId>book-superpom</artifactId>
     <name>Book Superpom</name>
     <packaging>pom</packaging>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.5</version>
     
     <properties>
         <bookFileName>${title} v${project.version}</bookFileName>
