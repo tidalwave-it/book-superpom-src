@@ -20,7 +20,10 @@
         <maven.build.timestamp.format>dd-MM-yyyy HH:mm</maven.build.timestamp.format>
         <book.timestamp>${maven.build.timestamp}</book.timestamp>
         <typesetting.version>1.2</typesetting.version>
-        <photoPath>/Volumes/Media/Photography/Photos/Books/Photos</photoPath>
+        <photoPath.print.srgb>${photoPath.base}/Print/sRGB/${photoPath.folder}</photoPath.print.srgb>
+        <photoPath.print.adobergb>${photoPath.base}/Print/AdobeRGB/${photoPath.folder}</photoPath.print.adobergb>
+        <photoPath.ebook>${photoPath.base}/eBook/sRGB/${photoPath.folder}</photoPath.ebook>
+
         <typeSetting.dir>${basedir}/target/filtered-typesetting</typeSetting.dir>
 
         <scm.repo.url>ssh://hg@bitbucket.org/fabriziogiudici/book-superpom-src</scm.repo.url>
@@ -142,7 +145,7 @@
                                     <xslFile>${typeSetting.dir}/fop/xslt/PhotoBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Standard landscape, dust jacket).pdf</outputFileName>
                                     <xsltParameters>
-                                        <photoPath>${photoPath}/Print/sRGB</photoPath>
+                                        <photoPath>${photoPath.print.srgb}</photoPath>
                                         <format>blurb:standard landscape:hardcover,dust jacket:standard paper</format>
                                     </xsltParameters>
                                     <rendererOptions>
@@ -160,7 +163,7 @@
                                     <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Standard landscape, dust jacket) Cover.pdf</outputFileName>
                                     <xsltParameters>
-                                        <photoPath>${photoPath}/Print/sRGB</photoPath>
+                                        <photoPath>${photoPath.print.srgb}</photoPath>
                                         <format>blurb:standard landscape:hardcover,dust jacket:standard paper</format>
                                     </xsltParameters>
                                     <rendererOptions>
@@ -180,7 +183,7 @@
                                     <xslFile>${typeSetting.dir}/fop/xslt/PhotoBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Standard landscape, softcover).pdf</outputFileName>
                                     <xsltParameters>
-                                        <photoPath>${photoPath}/Print/sRGB</photoPath>
+                                        <photoPath>${photoPath.print.srgb}</photoPath>
                                         <format>blurb:standard landscape:softcover:standard paper</format>
                                     </xsltParameters>
                                     <rendererOptions>
@@ -198,7 +201,7 @@
                                     <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Standard landscape, softcover) Cover.pdf</outputFileName>
                                     <xsltParameters>
-                                        <photoPath>${photoPath}/Print/sRGB</photoPath>
+                                        <photoPath>${photoPath.print.srgb}</photoPath>
                                         <format>blurb:standard landscape:softcover:standard paper</format>
                                     </xsltParameters>
                                     <rendererOptions>
@@ -217,7 +220,7 @@
                                     <xslFile>${typeSetting.dir}/fop/xslt/PhotoBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Standard landscape, imagewrap).pdf</outputFileName>
                                     <xsltParameters>
-                                        <photoPath>${photoPath}/Print/sRGB</photoPath>
+                                        <photoPath>${photoPath.print.srgb}</photoPath>
                                         <format>blurb:standard landscape:hardcover,imagewrap:standard paper</format>
                                     </xsltParameters>
                                     <rendererOptions>
@@ -235,7 +238,7 @@
                                     <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Standard landscape, imagewrap) Cover.pdf</outputFileName>
                                     <xsltParameters>
-                                        <photoPath>${photoPath}/Print/sRGB</photoPath>
+                                        <photoPath>${photoPath.print.srgb}</photoPath>
                                         <format>blurb:standard landscape:hardcover,imagewrap:standard paper</format>
                                     </xsltParameters>
                                     <rendererOptions>
@@ -253,7 +256,7 @@
                                     <xslFile>${typeSetting.dir}/fop/xslt/PhotoBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Large format landscape, imagewrap).pdf</outputFileName>
                                     <xsltParameters>
-                                        <photoPath>${photoPath}/Print/sRGB</photoPath>
+                                        <photoPath>${photoPath.print.srgb}</photoPath>
                                         <format>blurb:large format landscape:hardcover,imagewrap:standard paper</format>
                                     </xsltParameters>
                                     <rendererOptions>
@@ -271,7 +274,7 @@
                                     <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Large format landscape, imagewrap) Cover.pdf</outputFileName>
                                     <xsltParameters>
-                                        <photoPath>${photoPath}/Print/sRGB</photoPath>
+                                        <photoPath>${photoPath.print.srgb}</photoPath>
                                         <format>blurb:large format landscape:hardcover,imagewrap:standard paper</format>
                                     </xsltParameters>
                                     <rendererOptions>
@@ -290,7 +293,7 @@
                                     <xslFile>${typeSetting.dir}/fop/xslt/PhotoBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Large format landscape, dust jacket).pdf</outputFileName>
                                     <xsltParameters>
-                                        <photoPath>${photoPath}/Print/sRGB</photoPath>
+                                        <photoPath>${photoPath.print.srgb}</photoPath>
                                         <format>blurb:large format landscape:hardcover,dust jacket:standard paper</format>
                                     </xsltParameters>
                                     <rendererOptions>
@@ -308,7 +311,7 @@
                                     <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Blurb Large format landscape, dust jacket) Cover.pdf</outputFileName>
                                     <xsltParameters>
-                                        <photoPath>${photoPath}/Print/sRGB</photoPath>
+                                        <photoPath>${photoPath.print.srgb}</photoPath>
                                         <format>blurb:large format landscape:hardcover,dust jacket:standard paper</format>
                                     </xsltParameters>
                                     <rendererOptions>
@@ -328,7 +331,7 @@
                                     <xslFile>${typeSetting.dir}/fop/xslt/PhotoBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Viovio 11x8.5).pdf</outputFileName>
                                     <xsltParameters>
-                                        <photoPath>${photoPath}/Print/AdobeRGB</photoPath>
+                                        <photoPath>${photoPath.print.adobergb}</photoPath>
                                         <format>viovio:11x8.5:imagewrap hardcover:premium</format>
                                     </xsltParameters>
                                 </configuration>
@@ -343,7 +346,7 @@
                                     <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookCover-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} (Viovio 11x8.5) Cover.pdf</outputFileName>
                                     <xsltParameters>
-                                        <photoPath>${photoPath}/Print/sRGB</photoPath>
+                                        <photoPath>${photoPath.print.srgb}</photoPath>
                                         <format>viovio:11x8.5:imagewrap hardcover:premium</format>
                                     </xsltParameters>
                                 </configuration>
@@ -359,7 +362,7 @@
                                     <xslFile>${typeSetting.dir}/fop/xslt/PhotoBookeBook-fo.xslt</xslFile>
                                     <outputFileName>${bookFileName} eBook.pdf</outputFileName>
                                     <xsltParameters>
-                                        <photoPath>${photoPath}/eBook</photoPath>
+                                        <photoPath>${photoPath.ebook}</photoPath>
                                         <format>eBook:12x8</format>
                                     </xsltParameters>
                                 </configuration>
