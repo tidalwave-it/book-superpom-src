@@ -10,9 +10,9 @@
         <relativePath/>
     </parent>
 
-    <groupId>net.stoppingdown.books</groupId>
+    <groupId>it.tidalwave-typesetting</groupId>
     <artifactId>book-superpom</artifactId>
-    <name>Book Superpom</name>
+    <name>Typesetting - Book Super POM</name>
     <packaging>pom</packaging>
     <version>1.6-SNAPSHOT</version>
 
